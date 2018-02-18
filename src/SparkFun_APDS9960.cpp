@@ -833,6 +833,14 @@ bool SparkFun_APDS9960::processGestureData()
             }
         }
     }
+
+	/* Catch to make sure we don't divide by 0 */
+	if( ((u_first + d_first) == 0) ||
+			((l_first + r_first) == 0) ||
+			((u_last + d_last) == 0) ||
+			((l_last + r_last) == 0) ) {
+		return false;
+	}
     
     /* Calculate the first vs. last ratio of up/down and left/right */
     ud_ratio_first = ((u_first - d_first) * 100) / (u_first + d_first);
